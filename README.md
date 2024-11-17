@@ -1,6 +1,4 @@
-Got it! Here's an updated version of your `README.md` without mentioning Tailwind CSS, focusing on the technologies you actually used for the project:
 
----
 
 # One Store Dashboard
 
