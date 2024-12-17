@@ -26,121 +26,125 @@ import AddFlashSale from "../pages/flash-sale/add-flash-sale";
 import EditFlashSale from "../pages/flash-sale/edit-flash-sale";
 import ShowOrdersDetails from "../pages/orders/show-orders-details";
 import ShopSettings from "../pages/shop-settings/shop-settings";
+import ManageUsers from "../pages/users/manage-users";
 const router = createBrowserRouter([
-    {
-        path: "/",
-        element: <ProtectedRoute><DefaultLayout /></ProtectedRoute>,
-        //   loader: rootLoader,
-        children: [
-            {
-                path: "",
-                element: <Home />,
-                //   loader: teamLoader,
-            },
-            {
-                path: "products",
-                element: <ProductList />,
+  {
+    path: "/",
+    element: (
+      <ProtectedRoute>
+        <DefaultLayout />
+      </ProtectedRoute>
+    ),
+    //   loader: rootLoader,
+    children: [
+      {
+        path: "",
+        element: <Home />,
+        //   loader: teamLoader,
+      },
+      {
+        path: "products",
+        element: <ProductList />,
+      },
+      {
+        path: "products/add",
+        element: <AddProducts />,
+      },
+      {
+        path: "products/edit/:id",
+        element: <EditProducts />,
+      },
+      {
+        path: "category",
+        element: <CategoryList />,
+      },
+      {
+        path: "category/add",
+        element: <AddCategory />,
+      },
+      {
+        path: "category/edit/:id",
+        element: <EditCategory />,
+      },
 
-            },
-            {
-                path: "products/add",
-                element: <AddProducts />,
-            },
-            {
-                path: "products/edit/:id",
-                element: <EditProducts />,
-            },
-            {
-                path: "category",
-                element: <CategoryList />
-            },
-            {
-                path: "category/add",
-                element: <AddCategory />
-            },
-            {
-                path: "category/edit/:id",
-                element: <EditCategory />
-            },
-
-            {
-                path: "colors",
-                element: <ColorsList />
-            },
-            {
-                path: "colors/add",
-                element: <AddColors />
-            },
-            {
-                path: "colors/edit/:id",
-                element: <EditColors />
-            },
-            {
-                path: "sizes",
-                element: <SizeList />
-            },
-            {
-                path: "sizes/add",
-                element: <AddSize />
-            },
-            {
-                path: "sizes/edit/:id",
-                element: <EditSize />
-            },
-            {
-                path: "banners",
-                element: <Banner />
-            },
-            {
-                path: "orders",
-                element: <ManageOrders />
-            },
-            {
-                path: '/orders/:id',
-                element: <ShowOrdersDetails />
-            },
-            {
-                path: "/orders/invoice/:id",
-                element: <OrderInvoice />
-            },
-            {
-                path: "menus",
-                element: <MenuList />
-            },
-            {
-                path: "youtube-promotion",
-                element: <YoutubePromotion />
-            },
-            {
-                path: 'facebook-pixel',
-                element: <FacebookPixel />
-            },
-            {
-                path: 'flash-sale',
-                element: <FlashSale />
-            },
-            {
-                path: '/flash-sale/add',
-                element: <AddFlashSale />
-            },
-            {
-                path: '/flash-sale/edit/:id',
-                element: <EditFlashSale />
-            },
-            {
-                path: 'shop-settings',
-                element: <ShopSettings />
-            }
-
-
-
-        ],
-    },
-    {
-        path: "/login",
-        element: <SignIn />
-    }
+      {
+        path: "colors",
+        element: <ColorsList />,
+      },
+      {
+        path: "colors/add",
+        element: <AddColors />,
+      },
+      {
+        path: "colors/edit/:id",
+        element: <EditColors />,
+      },
+      {
+        path: "sizes",
+        element: <SizeList />,
+      },
+      {
+        path: "sizes/add",
+        element: <AddSize />,
+      },
+      {
+        path: "sizes/edit/:id",
+        element: <EditSize />,
+      },
+      {
+        path: "banners",
+        element: <Banner />,
+      },
+      {
+        path: "users",
+        element: <ManageUsers />,
+      },
+      {
+        path: "orders",
+        element: <ManageOrders />,
+      },
+      {
+        path: "/orders/:id",
+        element: <ShowOrdersDetails />,
+      },
+      {
+        path: "/orders/invoice/:id",
+        element: <OrderInvoice />,
+      },
+      {
+        path: "menus",
+        element: <MenuList />,
+      },
+      {
+        path: "youtube-promotion",
+        element: <YoutubePromotion />,
+      },
+      {
+        path: "facebook-pixel",
+        element: <FacebookPixel />,
+      },
+      {
+        path: "flash-sale",
+        element: <FlashSale />,
+      },
+      {
+        path: "/flash-sale/add",
+        element: <AddFlashSale />,
+      },
+      {
+        path: "/flash-sale/edit/:id",
+        element: <EditFlashSale />,
+      },
+      {
+        path: "shop-settings",
+        element: <ShopSettings />,
+      },
+    ],
+  },
+  {
+    path: "/login",
+    element: <SignIn />,
+  },
 ]);
-
 
 export default router;
