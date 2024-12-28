@@ -6,7 +6,7 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
-import { IOrders } from './orders.interface';
+import { IOrders } from './orders?.interface';
 import { useUpdateOrderMutation } from '../../store/services/orderApiSlice';
 import UseCustomToast from '../../hooks/UseCustomToast';
 import { FormControl, Select } from '@mui/material';
@@ -41,7 +41,7 @@ export default function EditCustomerInfo({ orders }: { orders: IOrders }) {
                         formData.forEach((value, key) => {
                             formJson[key] = value.toString();
                         });
-                        UseCustomToast(updateOrder({ data: formJson, id: orders._id as string }), 'Order Updated Successfully',)
+                        UseCustomToast(updateOrder({ data: formJson, id: orders?._id as string }), 'Order Updated Successfully',)
                     },
                 }}
             >
@@ -54,7 +54,7 @@ export default function EditCustomerInfo({ orders }: { orders: IOrders }) {
                     <TextField
                         autoFocus
                         required
-                        defaultValue={orders.fullName}
+                        defaultValue={orders?.fullName}
                         margin="dense"
                         id="name"
                         name="fullName"
@@ -65,7 +65,7 @@ export default function EditCustomerInfo({ orders }: { orders: IOrders }) {
                     />
                     <TextField
                         required
-                        defaultValue={orders.phoneNumber}
+                        defaultValue={orders?.phoneNumber}
                         margin="dense"
                         id="phone"
                         name="phoneNumber"
@@ -76,7 +76,7 @@ export default function EditCustomerInfo({ orders }: { orders: IOrders }) {
                     />
                     {/* <TextField
                         required
-                        defaultValue={orders.em}
+                        defaultValue={orders?.em}
                         margin="dense"
                         id="email"
                         name="email"
@@ -88,7 +88,7 @@ export default function EditCustomerInfo({ orders }: { orders: IOrders }) {
                     <FormControl fullWidth variant='standard'>
                         <Select
                             native
-                            defaultValue={orders.status}
+                            defaultValue={orders?.status}
                             inputProps={{
                                 name: 'status',
                                 id: 'status',

@@ -20,9 +20,9 @@ const order = baseApi.injectEndpoints({
         }),
         updateOrder: builder.mutation({
             query: (order: { data: unknown, id: string }) => ({
-                url: `/orders/${order.id}`,
+                url: `/orders/${order?.id}`,
                 method: 'PATCH',
-                body: order.data
+                body: order?.data
             }),
             invalidatesTags: ["order"]
         }),
