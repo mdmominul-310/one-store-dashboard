@@ -10,22 +10,24 @@ import {
 } from "@mui/material";
 import { useParams } from "react-router-dom";
 import {
-  useDeleteOrderMutation,
   useGetSingleOrderQuery,
+  useUpdateOrderMutation,
 } from "../../store/services/orderApiSlice";
 import { generateOrderInvoice } from "./order-invoice";
 import EditAddress from "./edit-address";
 import EditCustomerInfo from "./edit-customer-info";
-import React from "react";
+import React, { useState } from "react";
 import ConfirmationDialog from "../../component/ui/confirmation-dialog";
 import UseCustomToast from "../../hooks/UseCustomToast";
 import AddOrderItem from "./add-order-item";
+import { IOrders } from "./orders.interface";
 
 const ShowOrdersDetails = () => {
   const [open, setOpen] = React.useState(false);
+  const [selectedId, setSelectedId] = useState<number | null>(null);
   const id = useParams().id;
   const { data, isLoading } = useGetSingleOrderQuery(id);
-  const [deleteOrder] = useDeleteOrderMutation();
+  const [updateOrder] = useUpdateOrderMutation();
   const createDate = new Date(data?.data?.createdAt).toLocaleDateString();
   if (isLoading) {
     return <div>...loading</div>;
@@ -38,9 +40,28 @@ const ShowOrdersDetails = () => {
   };
 
   const handleDelete = () => {
-    UseCustomToast(deleteOrder(id), "Order Deleted Successfully");
+    const order: IOrders = data?.data;
+    const filterProduct = order?.products?.find(
+      (_, index) => index === selectedId
+    );
+    if (!filterProduct) {
+      return;
+    }
+
+    const updatedOrder = {
+      ...order,
+      products: order.products.filter((_, index) => index !== selectedId),
+      total: (Number(order.total) - filterProduct.price).toString(),
+    };
+    UseCustomToast(
+      updateOrder({ data: updatedOrder, id: id as string }),
+      "Order Updating"
+    );
     setOpen(false);
+    setSelectedId(null);
   };
+
+
   return (
     <Box>
       <Box sx={{ display: "flex", justifyContent: "space-between" }}>
@@ -210,7 +231,7 @@ const ShowOrdersDetails = () => {
                       <IconButton
                         disabled={index === 0 ? true : false}
                         onClick={() => {
-                          // setSelectedId(params.row._id);
+                          setSelectedId(index);
                           setOpen(true);
                         }}
                       >
@@ -222,7 +243,7 @@ const ShowOrdersDetails = () => {
               </Grid>
             </Grid>
 
-            <AddOrderItem order={data?.data}/>
+            <AddOrderItem order={data?.data} />
 
             <Box
               sx={{
@@ -238,7 +259,7 @@ const ShowOrdersDetails = () => {
                 </Typography>
                 <Typography sx={{ fontSize: 17, fontWeight: 550 }}>
                   Subtotal:{" "}
-                  {parseInt(data.data.total) -
+                  {parseInt(data?.data?.total) -
                     parseInt(data?.data?.deliveryCharge)}
                 </Typography>
                 <Typography sx={{ fontSize: 17, fontWeight: 550 }}>

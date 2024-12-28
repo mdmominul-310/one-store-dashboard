@@ -39,13 +39,13 @@ export default function AddOrderItem({ order }: { order: IOrders }) {
         //     const formData = new FormData(event.currentTarget);
         //     const formJson = Object.fromEntries(formData.entries());
         //     const address: string =
-        //       formJson?.address?.toString() || orders.address;
+        //       formJson?.address?.toString() || orders?.address;
         //     const deliveryArea: string =
-        //       formJson?.deliveryArea?.toString() || orders.deliveryArea;
+        //       formJson?.deliveryArea?.toString() || orders?.deliveryArea;
         //     UseCustomToast(
         //       updateOrder({
         //         data: { address, deliveryArea },
-        //         id: orders._id as string,
+        //         id: orders?._id as string,
         //       }),
         //       "Order Updated Successfully"
         //     );
@@ -63,7 +63,7 @@ export default function AddOrderItem({ order }: { order: IOrders }) {
                 {data?.data?.map((product: IOrderVariantProduct) => {
                   return (
                     <Grid item key={product._id} xs={4}>
-                      <ProductCard product={product} order={order}/>
+                      <ProductCard product={product} order={order} />
                     </Grid>
                   );
                 })}
